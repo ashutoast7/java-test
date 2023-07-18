@@ -16,7 +16,7 @@ pipeline {
         }
 
 
-         stage("SonarQube analysis") {
+        stage("SonarQube analysis") {
              agent any
 
              when {
