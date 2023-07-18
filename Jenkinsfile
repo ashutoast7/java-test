@@ -18,19 +18,12 @@ pipeline {
 
         stage("SonarQube analysis") {
              agent any
-
-             when {
-                 anyOf {
-                     branch 'feature/*'
-                     branch 'main'
-                 }
-             }
              steps {
                  withSonarQubeEnv('Sonar') {
-                     sh 'mvn sonar:sonar'
-                 }
-             }
-         }
+                    sh 'mvn sonar:sonar'
+                }
+            }
+        }
 
          stage("Quality Gate") {
              steps {
@@ -39,11 +32,11 @@ pipeline {
                          timeout(time: 10, unit: 'MINUTES') {
                          waitForQualityGate abortPipeline: true
                          }
-                        }
+                    }
                     catch (Exception ex) {
 
-                      }
-                 }
+                    }
+                }
             }
          }
 
